@@ -6,6 +6,14 @@ import '../services/games_services.dart';
 class GamesApiProvider extends ChangeNotifier{
   late final GamesApiService apiService;
   late final GamesServices gamesServices;
+
+  GamesApiProvider(){
+    apiService= GamesApiService(baseUrl: 'https://booking-system-4kmh.onrender.com/api');
+    gamesServices= GamesServices(gamesApiService: apiService);
+  }
+}
+
+class ServicesProvider extends ChangeNotifier {
   int _currentTab = 0;
   int get currentTab => _currentTab;
 
@@ -13,13 +21,4 @@ class GamesApiProvider extends ChangeNotifier{
     _currentTab = index;
     notifyListeners();
   }
-  GamesApiProvider(){
-    apiService= GamesApiService(baseUrl: 'https://booking-system-4kmh.onrender.com/api');
-    gamesServices= GamesServices(gamesApiService: apiService);
-
-  }
-}
-
-class ServicesProvider extends ChangeNotifier {
-
 }

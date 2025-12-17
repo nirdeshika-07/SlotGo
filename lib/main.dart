@@ -5,8 +5,11 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    Provider<GamesApiProvider>(
-      create:(_)=> GamesApiProvider(),
+    MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_)=> GamesApiProvider()),
+          ChangeNotifierProvider(create: (_)=> ServicesProvider()),
+        ],
       child: const MyApp(),
     ),
   );
@@ -17,10 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SlotGo',
       // theme: ThemeData(
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       // ),
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
 
     );

@@ -10,8 +10,8 @@ class OutdoorScreen extends StatefulWidget {
 class _OutdoorScreenState extends State<OutdoorScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Text('Outdoor'),
+    return Center(
+      child: Text('Outdoor games'),
     );
   }
 }
