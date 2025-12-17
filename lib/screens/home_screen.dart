@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_booking_system/components/reusable_popups.dart';
 import 'package:game_booking_system/components/reusable_widget.dart';
 import 'package:game_booking_system/screens/indoor_screen.dart';
 import 'package:game_booking_system/screens/outdoor_screen.dart';
@@ -112,9 +113,21 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             onTap: (){
               if(index==0){
                 Provider.of<ServicesProvider>(context, listen: false).switchTab(1);
+                SnackBarUtils.showSnackBar(
+                    context,
+                    message: 'Switched to Indoor Games',
+                    type: SnackBarType.success,
+                  duration: Duration(seconds: 1),
+                );
               }
               else{
                 Provider.of<ServicesProvider>(context, listen: false).switchTab(2);
+                SnackBarUtils.showSnackBar(
+                  context,
+                  message: 'Switched to Outdoor Games',
+                  type: SnackBarType.success,
+                  duration: Duration(seconds: 1),
+                );
               }
             },
             child: Column(

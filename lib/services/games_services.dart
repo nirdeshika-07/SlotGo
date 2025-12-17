@@ -61,4 +61,31 @@ class GamesServices{
 //     Games(id: '8', name: 'VolleyBall',type: 'outdoor'),
 //   ];
 // }
+  Future<List<Games>> fetchOutdoorGames() async {
+    try{
+      final data = await gamesApiService.get('/sports?type=outdoor');
+
+      final List<dynamic> list= data as List<dynamic>;
+
+      final games=list.map((item)=>Games.fromJson(item as Map<String,dynamic>)).toList();
+
+      final seenNames=<String>{};
+      final uniqueGames=<Games> [];
+
+      for(final g in games){
+        if(!seenNames.contains(g.name)){
+          seenNames.add(g.name);
+          uniqueGames.add(g);
+        }
+      }
+      return uniqueGames;
+    }
+    catch(e){
+      throw Exception('Outdoor games error:$e');
+    }
+  }
+  Future<List<String>> fetchUniqueOutdoorNames() async{
+    final games= await fetchIndoorGames();
+    return games.map((g)=> g.name).toSet().toList();
+  }
 }
