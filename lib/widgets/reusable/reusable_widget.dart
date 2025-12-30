@@ -38,8 +38,14 @@ class GameCard extends StatelessWidget{
                 flex: 3,
                 child: ClipRRect(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  child: CachedNetworkImage(
-                    imageUrl:'https://th.bing.com/th/id/R.fc4180daaa314633c982c7744db763fc?rik=EVHHwRIR5%2fV5Fg&riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2f5%2f58%2fSnooker_table_selby.JPG&ehk=LszUCle0AX6GKMroQVj9%2fgcBQXSp2vX0gV88pSf4WyM%3d&risl=1&pid=ImgRaw&r=0',
+
+                  child: (game.imageUrl.isEmpty)
+                      ? Image.asset(
+                      "assets/images/no_image.jpg",
+                    fit: BoxFit.cover,
+                  )
+                  :CachedNetworkImage(
+                    imageUrl:game.imageUrl,
                     fit: BoxFit.cover,
                     placeholder: (context,url)=> Container(
                       color: Colors.grey[200],

@@ -1,13 +1,13 @@
 class GamesModel{
   final String id;
   final String name;
-  // final String imageUrl;
+  final String imageUrl;
   final String type;
 
   GamesModel({
     required this.id,
     required this.name,
-    // required this.imageUrl,
+    required this.imageUrl,
     required this.type
   });
 
@@ -15,7 +15,7 @@ class GamesModel{
     return GamesModel(
     id: (json['_id'] as String). toString(),
     name: (json['name'] as String).toString(),
-    // imageUrl: json['imageUrl'] ?? '',
+    imageUrl: json['image'] ?? '',
     type: (json['type'] as String).toString()
   );
   }

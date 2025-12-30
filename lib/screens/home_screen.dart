@@ -19,8 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screenList= const[
     HomeScreenContent(),
     IndoorScreen(),
-    IndoorScreen(),
-    // OutdoorScreen(),
+    OutdoorScreen(),
     SettingsScreen(),
   ];
   @override

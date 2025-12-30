@@ -21,16 +21,6 @@ class GamesApiServices{
   //   ];
   // }
 
-  // dynamic _handleResponse(http.Response response){
-  //   final statusCode= response.statusCode;
-  //   if(statusCode>=200 && statusCode<300){
-  //     if(response.body.isEmpty) return null;
-  //     return json.decode (response.body);
-  //   }
-  //   else{
-  //     throw Exception('Request Failed\nStatus:$statusCode\nBody:${response.body}');
-  //   }
-  // }
   Future<List<GamesModel>> fetchIndoorGames() async {
     try{
       final gamesData = await gamesApiProvider.getData('/sports?type=indoor');
@@ -77,22 +67,24 @@ class GamesApiServices{
 // }
   Future<List<GamesModel>> fetchOutdoorGames() async {
     try{
-      final data = await gamesApiProvider.getData('/sports?type=outdoor');
+      final gamesData = await gamesApiProvider.getData('/sports?type=outdoor');
 
-      final List<dynamic> list= data as List<dynamic>;
+      final data = json.decode(gamesData);
+      if(data is List){
+        final games=data.map((item)=>GamesModel.fromJson(item as Map<String,dynamic>)).toList();
 
-      final games=list.map((item)=>GamesModel.fromJson(item as Map<String,dynamic>)).toList();
+        final seenNames=<String>{};
+        final uniqueGames=<GamesModel> [];
 
-      final seenNames=<String>{};
-      final uniqueGames=<GamesModel> [];
-
-      for(final g in games){
-        if(!seenNames.contains(g.name)){
-          seenNames.add(g.name);
-          uniqueGames.add(g);
+        for(final g in games){
+          if(!seenNames.contains(g.name)){
+            seenNames.add(g.name);
+            uniqueGames.add(g);
+          }
         }
+        return uniqueGames;
       }
-      return uniqueGames;
+      return [];
     }
     catch(e){
       throw Exception('Outdoor games error:$e');
