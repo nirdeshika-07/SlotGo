@@ -1,12 +1,12 @@
-import 'package:game_booking_system/services/games_api_service.dart';
+import 'dart:convert';
 
-import '../models/games.dart';
+import '../models/games_model.dart';
+import '../provider/games_data_provider.dart';
 
-class GamesServices{
+class GamesApiServices{
+  final GamesApiProvider gamesApiProvider;
 
-  final GamesApiService gamesApiService;
-
-  GamesServices({required this.gamesApiService});
+  GamesApiServices({required this.gamesApiProvider});
   // static Future<List<Games>> fetchIndoorGames() async{
   //   await Future.delayed(Duration(milliseconds: 800));
   //   return[
@@ -20,24 +20,38 @@ class GamesServices{
   //     Games(id: '4', name: 'Table Tennis', type: 'indoor')
   //   ];
   // }
-  Future<List<Games>> fetchIndoorGames() async {
+
+  // dynamic _handleResponse(http.Response response){
+  //   final statusCode= response.statusCode;
+  //   if(statusCode>=200 && statusCode<300){
+  //     if(response.body.isEmpty) return null;
+  //     return json.decode (response.body);
+  //   }
+  //   else{
+  //     throw Exception('Request Failed\nStatus:$statusCode\nBody:${response.body}');
+  //   }
+  // }
+  Future<List<GamesModel>> fetchIndoorGames() async {
     try{
-      final data = await gamesApiService.get('/sports?type=indoor');
+      final gamesData = await gamesApiProvider.getData('/sports?type=indoor');
 
-      final List<dynamic> list= data as List<dynamic>;
+      final data= json.decode (gamesData);
 
-      final games=list.map((item)=>Games.fromJson(item as Map<String,dynamic>)).toList();
+      if(data is List){
+        final games=data.map((item)=>GamesModel.fromJson(item as Map<String,dynamic>)).toList();
 
-      final seenNames=<String>{};
-      final uniqueGames=<Games> [];
+        final seenNames=<String>{};
+        final uniqueGames=<GamesModel> [];
 
-      for(final g in games){
-        if(!seenNames.contains(g.name)){
-          seenNames.add(g.name);
-          uniqueGames.add(g);
+        for(final g in games){
+          if(!seenNames.contains(g.name)){
+            seenNames.add(g.name);
+            uniqueGames.add(g);
+          }
         }
+        return uniqueGames;
       }
-      return uniqueGames;
+      return [];
     }
     catch(e){
       throw Exception('Indoor games error:$e');
@@ -61,16 +75,16 @@ class GamesServices{
 //     Games(id: '8', name: 'VolleyBall',type: 'outdoor'),
 //   ];
 // }
-  Future<List<Games>> fetchOutdoorGames() async {
+  Future<List<GamesModel>> fetchOutdoorGames() async {
     try{
-      final data = await gamesApiService.get('/sports?type=outdoor');
+      final data = await gamesApiProvider.getData('/sports?type=outdoor');
 
       final List<dynamic> list= data as List<dynamic>;
 
-      final games=list.map((item)=>Games.fromJson(item as Map<String,dynamic>)).toList();
+      final games=list.map((item)=>GamesModel.fromJson(item as Map<String,dynamic>)).toList();
 
       final seenNames=<String>{};
-      final uniqueGames=<Games> [];
+      final uniqueGames=<GamesModel> [];
 
       for(final g in games){
         if(!seenNames.contains(g.name)){

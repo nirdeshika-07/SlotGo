@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/components/reusable_widget.dart';
+import 'package:game_booking_system/widgets/reusable/reusable_widget.dart';
 
 enum SnackBarType {success,error}
 

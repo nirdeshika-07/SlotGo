@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_booking_system/bloc/games_bloc.dart';
+import 'package:game_booking_system/models/games_model.dart';
 
-import '../components/reusable_widget.dart';
-import '../models/games.dart';
-import '../provider/games_api_provider.dart';
+import '../widgets/reusable/reusable_widget.dart';
 
 class IndoorScreen extends StatefulWidget {
   const IndoorScreen({super.key});
@@ -15,38 +15,50 @@ class IndoorScreen extends StatefulWidget {
 class _IndoorScreenState extends State<IndoorScreen> {
 
   @override
+  void initState(){
+    super.initState();
+    context.read<GamesBloc>().add(IndoorGameFetched());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final services= Provider.of<GamesApiProvider>(context);
-    final gamesServices= services.gamesServices;
     return SafeArea(
-      child: FutureBuilder<List<Games>>(
-          future: gamesServices.fetchIndoorGames(),
-          builder: (context,snapshot){
-            if(snapshot.connectionState== ConnectionState.waiting){
-              return const Center(
-                child: CircularProgressIndicator(),
+      child: BlocBuilder<GamesBloc, GameStates>(
+          builder: (context, state) {
+            if(state is GamesFailure){
+              return Center(
+                    child: Text('Error Loading Indoor Games: ${state.error}'),
+                  );
+            }
+
+            if(state is GamesLoading){
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+            }
+            // if (games.isEmpty) {
+            //   return const Center(child: Text('No indoor games found.'));
+            // }
+            if(state is IndoorGamesSuccess){
+              final List<GamesModel> games=state.indoorGames;
+              return GridView.builder(
+                  itemCount: games.length,
+                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.85,
+                    crossAxisSpacing: 12,
+                  ),
+                  itemBuilder: (context,index){
+                    final game=games[index];
+                    return GameCard(game:game);
+                  }
               );
             }
-            if(snapshot.hasError){
-              return const Center(
-                child: Text('Error Loading Indoor Games'),
-              );
-            }
-            final games=snapshot.data ?? [];
-            if (games.isEmpty) {
-              return const Center(child: Text('No indoor games found.'));
-            }
-            return GridView.builder(
-                itemCount: games.length,
-                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.85,
-                  crossAxisSpacing: 12,
-                ),
-                itemBuilder: (context,index){
-                  final game=games[index];
-                  return GameCard(game:game);
-                }
+            return ListView(
+              children: [
+                SizedBox(height: 300,),
+                Center( child: CircularProgressIndicator(),)
+              ],
             );
           }
       )

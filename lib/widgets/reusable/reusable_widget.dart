@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/models/games.dart';
+import 'package:game_booking_system/models/games_model.dart';
 
 class AppTextStyles{
   static TextStyle bodyStyle({
@@ -18,7 +18,7 @@ class AppTextStyles{
 }
 
 class GameCard extends StatelessWidget{
-  final Games game;
+  final GamesModel game;
   const GameCard({Key? key ,required this.game}): super(key: key);
 
   @override

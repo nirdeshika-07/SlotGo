@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/components/reusable_popups.dart';
-import 'package:game_booking_system/components/reusable_widget.dart';
 import 'package:game_booking_system/screens/indoor_screen.dart';
 import 'package:game_booking_system/screens/outdoor_screen.dart';
 import 'package:game_booking_system/screens/settings_screen.dart';
-import 'package:provider/provider.dart';
 
-import '../provider/games_api_provider.dart';
+import '../widgets/reusable/reusable_popups.dart';
+import '../widgets/reusable/reusable_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,65 +19,61 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screenList= const[
     HomeScreenContent(),
     IndoorScreen(),
-    OutdoorScreen(),
+    IndoorScreen(),
+    // OutdoorScreen(),
     SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
-    return Consumer<ServicesProvider>(
-      builder: (context,services,child) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Center(
-                child: Text('SlotGo',
-                  style: AppTextStyles.bodyStyle(
-                      // color: Color.fromRGBO(150, 27, 30, 1),
-                    color: Color.fromRGBO(245, 245, 245, 1),
-                  ),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+            child: Text('SlotGo',
+              style: AppTextStyles.bodyStyle(
+                  // color: Color.fromRGBO(150, 27, 30, 1),
+                color: Color.fromRGBO(245, 245, 245, 1),
+              ),
             ),
-            backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),      ),
-          body:
-          IndexedStack(
-            children: screenList,
-            index: services.currentTab,
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
-            onTap: (index){
-              // setState(() {
-              //   selectedIndex=index;
-              // });
-              services.switchTab(index);
-            },
-              currentIndex: services.currentTab,
-              // selectedItemColor: Color.fromRGBO(237, 64, 211, 0.8),
-              selectedItemColor: Color.fromRGBO(150, 27, 30, 1),
-              items:const [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                  label: 'Home',
-                  backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.sports_esports_outlined),
-                  label: 'Indoor',
-                  backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.sports_cricket_outlined),
-                  label: 'Outdoor',
-                  backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                  label: 'Profile',
-                  backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
-                ),
-              ]
-          ),
-        );
-      }
+        ),
+        backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),      ),
+      body:
+      IndexedStack(
+        index: selectedIndex,
+        children: screenList,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
+        onTap: (index){
+          setState(() {
+            selectedIndex=index;
+          });
+        },
+          currentIndex: selectedIndex,
+          // selectedItemColor: Color.fromRGBO(237, 64, 211, 0.8),
+          selectedItemColor: Color.fromRGBO(150, 27, 30, 1),
+          items:const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.sports_esports_outlined),
+              label: 'Indoor',
+              backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.sports_cricket_outlined),
+              label: 'Outdoor',
+              backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+              label: 'Profile',
+              backgroundColor: Color.fromRGBO(40, 218, 238, 0.8),
+            ),
+          ]
+      ),
     );
   }
 }
@@ -111,24 +105,24 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           final gameNames=['Indoor games','Outdoor games'];
           return GestureDetector(
             onTap: (){
-              if(index==0){
-                Provider.of<ServicesProvider>(context, listen: false).switchTab(1);
-                SnackBarUtils.showSnackBar(
-                    context,
-                    message: 'Switched to Indoor Games',
-                    type: SnackBarType.success,
-                  duration: Duration(seconds: 1),
-                );
-              }
-              else{
-                Provider.of<ServicesProvider>(context, listen: false).switchTab(2);
-                SnackBarUtils.showSnackBar(
-                  context,
-                  message: 'Switched to Outdoor Games',
-                  type: SnackBarType.success,
-                  duration: Duration(seconds: 1),
-                );
-              }
+              // if(index==0){
+              //   Provider.of<ServicesProvider>(context, listen: false).switchTab(1);
+              //   SnackBarUtils.showSnackBar(
+              //       context,
+              //       message: 'Switched to Indoor Games',
+              //       type: SnackBarType.success,
+              //     duration: Duration(seconds: 1),
+              //   );
+              // }
+              // else{
+              //   Provider.of<ServicesProvider>(context, listen: false).switchTab(2);
+              //   SnackBarUtils.showSnackBar(
+              //     context,
+              //     message: 'Switched to Outdoor Games',
+              //     type: SnackBarType.success,
+              //     duration: Duration(seconds: 1),
+              //   );
+              // }
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
