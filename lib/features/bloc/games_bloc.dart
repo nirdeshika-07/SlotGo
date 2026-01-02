@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_booking_system/services/games_services.dart';
 
-import '../models/games_model.dart';
+import '../../data/models/games_model.dart';
+import '../../domain/services/games_services.dart';
+
 
 part 'games_state.dart';
 part 'games_event.dart';

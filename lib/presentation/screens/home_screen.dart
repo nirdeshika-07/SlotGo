@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/screens/indoor_screen.dart';
-import 'package:game_booking_system/screens/outdoor_screen.dart';
-import 'package:game_booking_system/screens/settings_screen.dart';
-
-import '../widgets/reusable/reusable_popups.dart';
-import '../widgets/reusable/reusable_widget.dart';
+import 'package:game_booking_system/presentation/screens/indoor_screen.dart';
+import 'package:game_booking_system/presentation/screens/outdoor_screen.dart';
+import 'package:game_booking_system/presentation/screens/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Center(
             child: Text('SlotGo',
-              style: AppTextStyles.bodyStyle(
+              style: TextStyle(
                   // color: Color.fromRGBO(150, 27, 30, 1),
                 color: Color.fromRGBO(245, 245, 245, 1),
               ),
@@ -139,7 +136,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                 ),
                 Text(
                   gameNames[index],
-                  style: AppTextStyles.bodyStyle(
+                  style: TextStyle(
                     fontSize: 14,
                   ),
                   textAlign: TextAlign.center,

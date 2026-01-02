@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import '../models/games_model.dart';
-import '../provider/games_data_provider.dart';
+import '../../data/models/games_model.dart';
+import '../../data/provider/games_data_provider.dart';
+
 
 class GamesApiServices{
   final GamesApiProvider gamesApiProvider;

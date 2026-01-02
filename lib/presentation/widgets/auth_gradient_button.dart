@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/widgets/reusable/pallete.dart';
+
+import '../../core/theme/pallete.dart';
 
 class GradientButton extends StatelessWidget {
-  const GradientButton({Key? key}) : super(key: key);
+  final String buttonValue;
+  const GradientButton({
+    super.key,
+    required this.buttonValue
+  }) ;
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +15,9 @@ class GradientButton extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            Pallete.gradient1,
-            Pallete.gradient2,
-            Pallete.gradient3,
+            SlotPallete.gradient1,
+            SlotPallete.gradient2,
+            SlotPallete.gradient3,
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
@@ -23,14 +28,14 @@ class GradientButton extends StatelessWidget {
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(395, 55),
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
+          backgroundColor: SlotPallete.transparentColor,
+          shadowColor: SlotPallete.transparentColor,
         ),
-        child: const Text(
-          'Sign in',
+        child: Text(
+          buttonValue,
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 17,
+            fontSize: 18,
           ),
         ),
       ),

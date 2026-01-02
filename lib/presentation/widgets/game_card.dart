@@ -1,21 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/models/games_model.dart';
 
-class AppTextStyles{
-  static TextStyle bodyStyle({
-    Color color = Colors.black,
-    double fontSize = 20,
-    FontWeight fontWeight = FontWeight.w700,
-  }) {
-    return TextStyle(
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        color: color,
-        fontFamily: 'Roboto'
-    );
-  }
-}
+import '../../data/models/games_model.dart';
 
 class GameCard extends StatelessWidget{
   final GamesModel game;
@@ -25,11 +11,11 @@ class GameCard extends StatelessWidget{
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: ()=>{},
-          // _navigateToCenters(context,game),
+      // _navigateToCenters(context,game),
       child: Card(
         elevation: 6,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20)
+            borderRadius: BorderRadius.circular(20)
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,10 +27,10 @@ class GameCard extends StatelessWidget{
 
                   child: (game.imageUrl.isEmpty)
                       ? Image.asset(
-                      "assets/images/no_image.jpg",
+                    "assets/images/no_image.jpg",
                     fit: BoxFit.cover,
                   )
-                  :CachedNetworkImage(
+                      :CachedNetworkImage(
                     imageUrl:game.imageUrl,
                     fit: BoxFit.cover,
                     placeholder: (context,url)=> Container(
@@ -60,18 +46,18 @@ class GameCard extends StatelessWidget{
             ),
             Expanded(
               flex: 1,
-                child: Padding(
-                    padding: EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        game.name,
-                        style: AppTextStyles.bodyStyle(),
-                      )
-                    ],
-                  ),
+              child: Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      game.name,
+                      style: TextStyle(),
+                    )
+                  ],
                 ),
+              ),
             ),
           ],
         ),

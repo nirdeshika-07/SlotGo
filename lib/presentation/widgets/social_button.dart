@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:game_booking_system/widgets/reusable/pallete.dart';
+
+import '../../core/theme/pallete.dart';
 
 class SocialButton extends StatelessWidget {
   final String iconPath;
@@ -24,7 +25,7 @@ class SocialButton extends StatelessWidget {
       label: Text(
         label,
         style: const TextStyle(
-          color: Pallete.whiteColor,
+          color: SlotPallete.whiteColor,
           fontSize: 17,
         ),
       ),
@@ -32,7 +33,7 @@ class SocialButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 30, horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(
           side: const BorderSide(
-            color: Pallete.borderColor,
+            color: SlotPallete.borderColor,
             width: 3,
           ),
           borderRadius: BorderRadius.circular(10),

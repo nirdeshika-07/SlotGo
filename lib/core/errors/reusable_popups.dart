@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:game_booking_system/widgets/reusable/reusable_widget.dart';
 
 enum SnackBarType {success,error}
 
@@ -23,7 +22,7 @@ class SnackBarUtils{
               Expanded(
                   child: Text(
                       message,
-                    style: AppTextStyles.bodyStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16),
                   )
               ),
             ],

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_booking_system/bloc/games_bloc.dart';
-import 'package:game_booking_system/provider/games_data_provider.dart';
+import 'package:game_booking_system/presentation/screens/login_screen.dart';
 
-import 'package:game_booking_system/screens/home_screen.dart';
-import 'package:game_booking_system/screens/login_screen.dart';
-import 'package:game_booking_system/services/games_services.dart';
+import 'core/theme/slot_theme.dart';
+import 'data/provider/games_data_provider.dart';
+import 'domain/services/games_services.dart';
+import 'features/bloc/games_bloc.dart';
+
 
 void main() {
   runApp(
@@ -25,12 +26,12 @@ class MyApp extends StatelessWidget {
         create: (context) => GamesBloc(context.read<GamesApiServices>()),
         child: MaterialApp(
           title: 'SlotGo',
-          theme: ThemeData.light().copyWith(
+          theme: SlotTheme.darkThemeMode,
+          // ThemeData.light().copyWith(
             // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            // scaffoldBackgroundColor: Pallete.backgroundColor,
-          ),
+          // ),
           debugShowCheckedModeBanner: false,
-          home: HomeScreen(),
+          home: LoginScreen(),
         ),
       ),
     );

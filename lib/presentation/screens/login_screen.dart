@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/gradient_button.dart';
-import '../widgets/login_field.dart';
+import '../widgets/auth_gradient_button.dart';
+import '../widgets/auth_field.dart';
 import '../widgets/social_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,17 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              LoginField(
+              AuthField(
                 hintText: 'Email',
                 controller: emailController,
               ),
               const SizedBox(height: 15),
-              LoginField(
+              AuthField(
                 hintText: 'Password',
                 controller: passwordController,
               ),
               const SizedBox(height: 20),
-              const GradientButton(),
+              const GradientButton(buttonValue: 'Sign In'),
             ],
           ),
         ),
